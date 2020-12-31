@@ -5,6 +5,7 @@ import OIcon from '@/components/o-icon'
 import { login } from '@/api/user'
 import { localCache, LOCAL_USERNAME } from '@/common/storage'
 import { setToken } from '@/common/auth'
+import { homePath } from '@/config'
 import './style/login.scss'
 
 class Login extends Component {
@@ -76,7 +77,7 @@ class Login extends Component {
             this.setState({
               loading: false
             }, () => {
-              this.props.history.push('/')
+              this.props.history.push(homePath)
             })
           }
         } else {
