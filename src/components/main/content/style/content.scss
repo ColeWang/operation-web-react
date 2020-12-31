@@ -1,0 +1,12 @@
+.main-content {
+  @include size(100%, 100%);
+  background: $background;
+  position: relative;
+  overflow: hidden;
+
+  .main-content-space {
+    @include size(100%, 100%);
+    padding: 18px;
+    overflow-y: auto;
+  }
+}

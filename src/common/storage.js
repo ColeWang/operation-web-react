@@ -1,8 +1,6 @@
 import { isValid } from '@/util'
 
 class GalleryCache {
-  cache
-
   constructor (target) {
     this.cache = target
   }

@@ -5,14 +5,14 @@ import { homePath } from '@/config'
 import './style/errorContent.scss'
 
 class ErrorContent extends Component {
-  timer = null
-
-  state = {
-    second: 5
-  }
-
   constructor (props) {
     super(props)
+
+    this.timer = null
+
+    this.state = {
+      second: 5
+    }
 
     this.backHome = this.backHome.bind(this)
     this.backPrev = this.backPrev.bind(this)

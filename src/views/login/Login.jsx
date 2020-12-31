@@ -9,20 +9,20 @@ import { homePath } from '@/config'
 import './style/login.scss'
 
 class Login extends Component {
-  state = {
-    // 登录
-    username: '',
-    password: '',
-    // checked
-    checked: false,
-    // loading
-    loading: false,
-    // error
-    errorInfo: ''
-  }
-
   constructor (props) {
     super(props)
+
+    this.state = {
+      // 登录
+      username: '',
+      password: '',
+      // checked
+      checked: false,
+      // loading
+      loading: false,
+      // error
+      errorInfo: ''
+    }
 
     const username = localCache.get(LOCAL_USERNAME)
     if (username) {
