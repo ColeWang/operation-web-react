@@ -1,4 +1,6 @@
 import { Component } from 'react'
+import { ALTER_INLINE_STATUS } from '../Main'
+import observer from '@/common/observer'
 import OIcon from '@/components/o-icon'
 import './style/header.scss'
 
@@ -10,7 +12,7 @@ export default class Header extends Component {
   }
 
   handleInline () {
-    this.props.setInlineStatus(!this.props.inlineStatus)
+    observer.emit(ALTER_INLINE_STATUS, !this.props.inlineStatus)
   }
 
   render () {
