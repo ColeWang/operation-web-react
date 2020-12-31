@@ -10,8 +10,12 @@ export default class Side extends Component {
     }
   }
 
-  state = {
-    setStyle: { width: '238px' }
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      setStyle: { width: '238px' }
+    }
   }
 
   render () {
