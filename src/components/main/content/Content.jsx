@@ -1,5 +1,5 @@
 import React, { Component, lazy, Suspense } from 'react'
-import { Redirect, Switch } from 'react-router-dom'
+import { Redirect, Switch, Route } from 'react-router-dom'
 import PrivateRoute from '@/router'
 import { BackTop } from 'antd'
 import './style/content.scss'
@@ -26,11 +26,16 @@ export default class Content extends Component {
   }
 
   render () {
+    function toHome () {
+      return (<Redirect to="/home"/>)
+    }
+
     return (
       <div className="main-content">
         <div className="main-content-space" ref={this.space}>
           <Suspense fallback={SuspenseLoading}>
             <Switch>
+              <Route exact path="/" render={toHome}/>
               <PrivateRoute path="/home" component={Home}/>
               <PrivateRoute path="/alpha-menu/level-1" component={Level1}/>
               <PrivateRoute path="/alpha-menu/level-2" component={Level2}/>
