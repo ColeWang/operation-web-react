@@ -1,5 +1,5 @@
 import { Component, Suspense, lazy } from 'react'
-import { BrowserRouter, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter, Switch } from 'react-router-dom'
 import { default as loading, BaseLoading } from '@/components/base-loading'
 import { ConfigProvider } from 'antd'
 import PrivateRoute from '@/router'
@@ -40,7 +40,6 @@ export default class App extends Component {
               <PrivateRoute path="/404" component={Error404}/>
               <PrivateRoute path="/401" component={Error401}/>
               <PrivateRoute path="/" component={Main}/>
-              <Redirect from="/*" to="/404"/>
             </Switch>
           </Suspense>
         </BrowserRouter>

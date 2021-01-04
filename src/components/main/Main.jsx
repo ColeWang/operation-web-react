@@ -1,5 +1,4 @@
 import { Component } from 'react'
-// import PrivateRoute from '@/router'
 import MainHeader from './header'
 import MainSide from './side'
 import MainContent from './content'
@@ -7,8 +6,6 @@ import observer from '@/common/observer'
 import { getMenuList } from './util'
 import { routeMenu } from '@/router'
 import './style/main.scss'
-
-// const Home = lazy(() => import('@/views/home'))
 
 export const ALTER_INLINE_STATUS = Symbol()
 

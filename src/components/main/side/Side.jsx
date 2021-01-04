@@ -52,7 +52,7 @@ class Side extends Component {
     return (
       <div className="main-side" style={state.setStyle}>
         <div className="side">
-          <div className="logo"></div>
+          <div className="logo"/>
           <Menu {...menuProps}>
             {createMenuList(props.menuList)}
           </Menu>
