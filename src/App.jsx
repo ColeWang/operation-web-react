@@ -13,10 +13,18 @@ const Error500 = lazy(() => import('@/views/error-page/500'))
 const Error404 = lazy(() => import('@/views/error-page/404'))
 const Error401 = lazy(() => import('@/views/error-page/401'))
 
+/**
+ * 全局 loading
+ * @type {{
+ *   onShow(callback)
+ *   onHide(callback)
+ *   isVisible()
+ * }}
+ */
 export const baseLoading = {}
 const Loading = loading(BaseLoading, baseLoading)
 
-// 懒加载替换元素
+// lazy 懒加载替换元素
 const SuspenseLoading = (<div/>)
 
 export default class App extends Component {
