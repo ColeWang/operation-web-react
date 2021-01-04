@@ -1,10 +1,16 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
 import BaseLoading from './BaseLoading'
 
 function loading (Loading, target) {
   return class PP extends Component {
+    constructor (props) {
+      super(props)
+
+      this.proc = React.createRef()
+    }
+
     componentDidMount () {
-      const loading = this.refs.proc
+      const loading = this.proc.current
       target.onShow = this.onShow.bind(loading)
       target.onHide = this.onHide.bind(loading)
       target.isVisible = this.isVisible.bind(loading)
@@ -36,7 +42,7 @@ function loading (Loading, target) {
 
     render () {
       return (
-        <Loading ref="proc"/>
+        <Loading ref={this.proc}/>
       )
     }
   }

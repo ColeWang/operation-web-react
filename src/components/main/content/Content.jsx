@@ -1,4 +1,4 @@
-import { Component, lazy, Suspense } from 'react'
+import React, { Component, lazy, Suspense } from 'react'
 import { BackTop } from 'antd'
 import PrivateRoute from '@/router'
 import './style/content.scss'
@@ -14,10 +14,21 @@ const SuspenseLoading = (<div/>)
 // @todo 权限以及路由权限校验
 
 export default class Content extends Component {
+  constructor (props) {
+    super(props)
+
+    this.space = React.createRef()
+    this.setTarget = this.setTarget.bind(this)
+  }
+
+  setTarget () {
+    return this.space.current
+  }
+
   render () {
     return (
       <div className="main-content">
-        <div className="main-content-space" ref="space">
+        <div className="main-content-space" ref={this.space}>
           <Suspense fallback={SuspenseLoading}>
             <Switch>
               <PrivateRoute path="/home" component={Home}/>
@@ -27,7 +38,7 @@ export default class Content extends Component {
             </Switch>
           </Suspense>
         </div>
-        <BackTop target={() => this.refs.space}/>
+        <BackTop target={this.setTarget}/>
       </div>
     )
   }

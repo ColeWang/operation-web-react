@@ -1,11 +1,11 @@
 import { Component } from 'react'
-import { Avatar, Dropdown } from 'antd'
+import { Avatar as AntAvatar, Dropdown } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
 import { withRouter } from 'react-router-dom'
 import { removeToken } from '@/common/auth'
 import './style/iAvatar.scss'
 
-class IAvatar extends Component {
+class Avatar extends Component {
   constructor (props) {
     super(props)
 
@@ -38,7 +38,7 @@ class IAvatar extends Component {
       <div className="avatar">
         <Dropdown {...dropdownProps}>
           <div className="avatar-con">
-            <Avatar icon={icon}/>
+            <AntAvatar icon={icon}/>
           </div>
         </Dropdown>
       </div>
@@ -46,4 +46,4 @@ class IAvatar extends Component {
   }
 }
 
-export default withRouter(IAvatar)
+export default withRouter(Avatar)

@@ -3,7 +3,7 @@ import { ALTER_INLINE_STATUS } from '../Main'
 import observer from '@/common/observer'
 import OIcon from '@/components/o-icon'
 import Fullscreen from './Fullscreen'
-import IAvatar from './IAvatar'
+import Avatar from './Avatar'
 import './style/header.scss'
 
 export default class Header extends Component {
@@ -34,7 +34,7 @@ export default class Header extends Component {
         </div>
         <div className="header-right">
           <Fullscreen/>
-          <IAvatar/>
+          <Avatar/>
         </div>
       </div>
     )
