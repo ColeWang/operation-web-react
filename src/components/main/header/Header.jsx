@@ -2,6 +2,7 @@ import { Component } from 'react'
 import { ALTER_INLINE_STATUS } from '../Main'
 import observer from '@/common/observer'
 import OIcon from '@/components/o-icon'
+import Fullscreen from './Fullscreen'
 import IAvatar from './IAvatar'
 import './style/header.scss'
 
@@ -32,6 +33,7 @@ export default class Header extends Component {
           </div>
         </div>
         <div className="header-right">
+          <Fullscreen/>
           <IAvatar/>
         </div>
       </div>

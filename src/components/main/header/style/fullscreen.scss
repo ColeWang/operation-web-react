@@ -1,0 +1,18 @@
+.fullscreen {
+  height: 100%;
+  width: 28px;
+  display: flex;
+  margin-right: 20px;
+
+  .icon {
+    cursor: pointer;
+    font-size: 28px;
+    line-height: 28px;
+    color: $icon;
+    margin: auto;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
