@@ -1,17 +1,6 @@
 import { hasOneOf } from '@/util/oneOf'
 
 /**
- * 路由权限效验
- */
-function showThisMenuEle (item, access) {
-  if (item.meta && item.meta.access && item.meta.access.length) {
-    return hasOneOf(item.meta.access, access)
-  } else {
-    return true
-  }
-}
-
-/**
  * 判断子元素 children
  */
 function hasChild (item) {
@@ -21,9 +10,9 @@ function hasChild (item) {
 /**
  * hasAccess
  */
-function hasAccess (access, route) {
-  if (route.meta && route.meta.access) {
-    return hasOneOf(access, route.meta.access)
+function hasAccess (route, access) {
+  if (route.meta && route.meta.access && route.meta.access.length) {
+    return hasOneOf(route.meta.access, access)
   } else {
     return true
   }
@@ -40,10 +29,10 @@ export function getMenuList (routers, access) {
       icon: (item.meta && item.meta.icon) || '',
       meta: item.meta
     }
-    if (hasChild(item) && showThisMenuEle(item, access)) {
+    if (hasChild(item) && hasAccess(item, access)) {
       obj.children = getMenuList(item.children, access)
     }
-    if (showThisMenuEle(item, access)) {
+    if (hasAccess(item, access)) {
       arr.push(obj)
     }
   })
@@ -60,14 +49,14 @@ export function showChildren (item) {
 /**
  * 权鉴
  */
-export function canTurnTo (name, access, routes) {
+export function canTurnTo (name, routes, access) {
   function routePermissionJudge (list) {
     // eslint-disable-next-line
     return list.some((item) => {
       if (item.children && item.children.length) {
         return routePermissionJudge(item.children)
       } else if (item.name === name) {
-        return hasAccess(access, item)
+        return hasAccess(item, access)
       }
     })
   }

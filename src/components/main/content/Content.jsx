@@ -1,8 +1,8 @@
 import React, { Component, lazy, Suspense } from 'react'
-import { BackTop } from 'antd'
-import PrivateRoute from '@/router'
-import './style/content.scss'
 import { Redirect, Switch } from 'react-router-dom'
+import PrivateRoute from '@/router'
+import { BackTop } from 'antd'
+import './style/content.scss'
 
 const Home = lazy(() => import('@/views/home'))
 const Level1 = lazy(() => import('@/views/alpha-menu/Level1'))
