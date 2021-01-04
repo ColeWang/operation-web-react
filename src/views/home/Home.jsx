@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import { Button } from 'antd'
+import './home.scss'
 
 export default class Home extends Component {
   render () {
