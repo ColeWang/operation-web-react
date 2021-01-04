@@ -11,6 +11,8 @@ const Level2 = lazy(() => import('@/views/alpha-menu/Level2'))
 // lazy 懒加载替换元素
 const SuspenseLoading = (<div/>)
 
+// @todo 权限以及路由权限校验
+
 export default class Content extends Component {
   render () {
     return (
