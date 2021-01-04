@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import BaseLoading from './BaseLoading'
 
-function Loading (Loading, target) {
+function loading (Loading, target) {
   return class PP extends Component {
     constructor (props) {
       super(props)
@@ -51,4 +51,4 @@ export {
   BaseLoading
 }
 
-export default Loading
+export default loading
