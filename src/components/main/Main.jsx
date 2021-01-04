@@ -4,6 +4,8 @@ import MainHeader from './header'
 import MainSide from './side'
 import MainContent from './content'
 import observer from '@/common/observer'
+import { getMenuList } from './util'
+import { routeMenu } from '@/router'
 import './style/main.scss'
 
 // const Home = lazy(() => import('@/views/home'))
@@ -15,7 +17,8 @@ export default class Main extends Component {
     super(props)
 
     this.state = {
-      inlineStatus: false
+      inlineStatus: false,
+      menuList: getMenuList(routeMenu, [])
     }
 
     this.setInlineStatus = this.setInlineStatus.bind(this)
@@ -37,7 +40,7 @@ export default class Main extends Component {
 
     return (
       <div className="main">
-        <MainSide inlineStatus={state.inlineStatus}/>
+        <MainSide menuList={state.menuList} inlineStatus={state.inlineStatus}/>
         <div className="prime">
           <MainHeader inlineStatus={state.inlineStatus}/>
           <div className="content">
