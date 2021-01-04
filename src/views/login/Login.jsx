@@ -97,14 +97,34 @@ class Login extends Component {
   render () {
     const { state } = this
 
-    const usernameBox = (<OIcon type="icondenglu-xuanzhong"/>)
-    const passwordBox = (<OIcon type="icondenglu-mima"/>)
     const usernameRules = [
       { required: true, message: '账号不能为空' }
     ]
     const passwordRules = [
       { required: true, message: '密码不能为空' }
     ]
+
+    const usernameIcon = (<OIcon type="icondenglu-xuanzhong"/>)
+    const passwordIcon = (<OIcon type="icondenglu-mima"/>)
+
+    const usernameInputProps = {
+      placeholder: '请输入用户名',
+      value: state.username,
+      onChange: this.inputEmit('username'),
+      addonBefore: usernameIcon
+    }
+    const passwordInputProps = {
+      placeholder: '请输入密码',
+      value: state.password,
+      onChange: this.inputEmit('password'),
+      addonBefore: passwordIcon
+    }
+
+    const checkedProps = {
+      checked: state.checked,
+      onChange: this.checkedChange
+    }
+
     return (
       <div className="login">
         <div className="login-con">
@@ -114,23 +134,13 @@ class Login extends Component {
           <div className="form-con">
             <Form onFinish={this.onFinish}>
               <Form.Item name="username" rules={usernameRules} initialValue={state.username}>
-                <Input
-                  placeholder="请输入用户名"
-                  value={state.username}
-                  onChange={this.inputEmit('username')}
-                  addonBefore={usernameBox}
-                />
+                <Input {...usernameInputProps}/>
               </Form.Item>
               <Form.Item name="password" rules={passwordRules} initialValue={state.password}>
-                <Input.Password
-                  placeholder="请输入密码"
-                  value={state.password}
-                  onChange={this.inputEmit('password')}
-                  addonBefore={passwordBox}
-                />
+                <Input.Password {...passwordInputProps}/>
               </Form.Item>
               <div className="checked-con">
-                <Checkbox checked={state.checked} onChange={this.checkedChange}>记住账号</Checkbox>
+                <Checkbox {...checkedProps}>记住账号</Checkbox>
                 <a href="http://www.baidu.com" rel="noopener noreferrer" target="_blank">忘记密码</a>
               </div>
               <Form.Item validateStatus="error" help={state.errorInfo}>

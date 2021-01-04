@@ -2,6 +2,7 @@ import { Component } from 'react'
 import { ALTER_INLINE_STATUS } from '../Main'
 import observer from '@/common/observer'
 import OIcon from '@/components/o-icon'
+import IAvatar from './IAvatar'
 import './style/header.scss'
 
 export default class Header extends Component {
@@ -31,7 +32,7 @@ export default class Header extends Component {
           </div>
         </div>
         <div className="header-right">
-          {JSON.stringify(props.inlineStatus)}
+          <IAvatar/>
         </div>
       </div>
     )
