@@ -18,15 +18,18 @@ export default class Main extends Component {
       inlineStatus: false
     }
 
-    observer.addListener(ALTER_INLINE_STATUS, (value) => {
-      this.setState({
-        inlineStatus: value
-      })
+    this.setInlineStatus = this.setInlineStatus.bind(this)
+    observer.addListener(ALTER_INLINE_STATUS, this.setInlineStatus)
+  }
+
+  setInlineStatus (value) {
+    this.setState({
+      inlineStatus: value
     })
   }
 
   componentWillUnmount () {
-    observer.removeListener(ALTER_INLINE_STATUS)
+    observer.removeListener(ALTER_INLINE_STATUS, this.setInlineStatus)
   }
 
   render () {

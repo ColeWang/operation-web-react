@@ -1,7 +1,5 @@
 import { Component } from 'react'
-import observer from '@/common/observer'
-
-export const BASE_LOADING = Symbol()
+import './style/baseLoading.scss'
 
 export default class BaseLoading extends Component {
   constructor (props) {
@@ -10,19 +8,19 @@ export default class BaseLoading extends Component {
     this.state = {
       visible: false
     }
-
-    observer.addListener(BASE_LOADING, (value) => {
-      this.setState({
-        visible: value
-      })
-    })
-  }
-
-  componentWillUnmount () {
-    observer.removeListener(BASE_LOADING)
   }
 
   render () {
-    return (<div>loading</div>)
+    const { state } = this
+
+    return (
+      <div className={`x-shade ${state.visible ? 'x-shade-show' : 'x-shade-hide'}`}>
+        <div className="x-loading-wrapper">
+          <svg viewBox="25 25 50 50" className="circular">
+            <circle cx="50" cy="50" r="20" fill="none" className="path"/>
+          </svg>
+        </div>
+      </div>
+    )
   }
 }
