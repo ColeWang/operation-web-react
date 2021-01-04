@@ -2,7 +2,7 @@ import { Component } from 'react'
 import LoginForm from './LoginForm'
 import './style/login.scss'
 
-function Login (LoginForm) {
+function login (LoginForm) {
   return class PP extends Component {
     render () {
       return (
@@ -24,4 +24,4 @@ function Login (LoginForm) {
   }
 }
 
-export default Login(LoginForm)
+export default login(LoginForm)
