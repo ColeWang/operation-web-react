@@ -57,12 +57,12 @@ class LoginForm extends Component {
           username: this.state.username,
           password: this.state.password,
         }
-        this.onLogin(_data)
+        this.submit(_data)
       })
     }
   }
 
-  onLogin (data) {
+  submit (data) {
     login(data)
       .then((res) => {
         if (res.actionResult === '1') {
