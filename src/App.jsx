@@ -35,10 +35,10 @@ export default class App extends Component {
         <BrowserRouter>
           <Suspense fallback={SuspenseLoading}>
             <Switch>
-              <PrivateRoute path="/login" component={Login}/>
-              <PrivateRoute path="/500" component={Error500}/>
-              <PrivateRoute path="/404" component={Error404}/>
-              <PrivateRoute path="/401" component={Error401}/>
+              <PrivateRoute exact path="/login" component={Login}/>
+              <PrivateRoute exact path="/500" component={Error500}/>
+              <PrivateRoute exact path="/404" component={Error404}/>
+              <PrivateRoute exact path="/401" component={Error401}/>
               <PrivateRoute path="/" component={Main}/>
             </Switch>
           </Suspense>

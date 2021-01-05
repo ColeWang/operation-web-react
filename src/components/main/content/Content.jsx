@@ -33,9 +33,9 @@ export default class Content extends Component {
           <Suspense fallback={SuspenseLoading}>
             <Switch>
               <Redirect exact from="/" to={homePath}/>
-              <PrivateRoute path="/home" component={Home}/>
-              <PrivateRoute path="/alpha-menu/level-1" component={Level1}/>
-              <PrivateRoute path="/alpha-menu/level-2" component={Level2}/>
+              <PrivateRoute exact path="/home" component={Home}/>
+              <PrivateRoute exact path="/alpha-menu/level-1" component={Level1}/>
+              <PrivateRoute exact path="/alpha-menu/level-2" component={Level2}/>
               <Redirect from="/*" to="/404"/>
             </Switch>
           </Suspense>
