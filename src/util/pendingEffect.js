@@ -1,9 +1,10 @@
 /**
  * 解决 button等组件loading状态
  */
+
+// @todo 实验 慎用
 export function pendingEffect (target, func) {
   function setLoading (val) {
-    console.log(val)
     this.setState({
       loading: val
     })

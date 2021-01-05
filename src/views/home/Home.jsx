@@ -16,14 +16,13 @@ export default class Home extends Component {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve()
-      }, 5000)
+      }, 1000)
     })
   }
 
   render () {
     const { state } = this
 
-    // @todo 待完善
     const onSubmit = pendingEffect(this, this.submit.bind(this))
 
     return (
