@@ -32,6 +32,8 @@ export default class App extends Component {
     moment.locale('zh-cn')
     return (
       <ConfigProvider locale={zhCN}>
+        {/* Loading 需先加载 勿动*/}
+        <Loading/>
         <BrowserRouter>
           <Suspense fallback={SuspenseLoading}>
             <Switch>
@@ -43,7 +45,6 @@ export default class App extends Component {
             </Switch>
           </Suspense>
         </BrowserRouter>
-        <Loading/>
       </ConfigProvider>
     )
   }
