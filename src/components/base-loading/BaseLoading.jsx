@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import { CSSTransition } from 'react-transition-group'
 import './style/baseLoading.scss'
 
 export default class BaseLoading extends Component {
@@ -13,14 +14,23 @@ export default class BaseLoading extends Component {
   render () {
     const { state } = this
 
+    const transitionProps = {
+      in: state.visible,
+      classNames: 'x-mask',
+      timeout: 300,
+      unmountOnExit: true
+    }
+
     return (
-      <div className={`x-shade ${state.visible ? 'x-shade-show' : 'x-shade-hide'}`}>
-        <div className="x-loading-wrapper">
-          <svg viewBox="25 25 50 50" className="circular">
-            <circle cx="50" cy="50" r="20" fill="none" className="path"/>
-          </svg>
+      <CSSTransition {...transitionProps}>
+        <div className="x-shade">
+          <div className="x-loading-wrapper">
+            <svg viewBox="25 25 50 50" className="circular">
+              <circle cx="50" cy="50" r="20" fill="none" className="path"/>
+            </svg>
+          </div>
         </div>
-      </div>
+      </CSSTransition>
     )
   }
 }

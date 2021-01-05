@@ -1,0 +1,26 @@
+// 遮罩
+.x-mask-enter-active {
+  animation: mask-in .3s;
+}
+
+.x-mask-exit-active {
+  animation: mask-out .3s;
+}
+
+@keyframes mask-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes mask-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
