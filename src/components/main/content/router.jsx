@@ -7,8 +7,8 @@ import store from '@/store'
 export default class Router extends Component {
   render () {
     const { routes } = this.props
-
-    const access = store.getState().user.userInfo.access
+    const storeState = store.getState()
+    const access = storeState.user.userInfo.access
     const routeList = getRouteList(routes, access)
 
     return (

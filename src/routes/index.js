@@ -1,6 +1,8 @@
 import { lazy } from 'react'
+import Main from '@/components/main'
 
 /**
+ * / 路径下 Main 组件生效 （一级路由不生效）
  * meta: {
  *  title: 导航栏title
  *  icon: 导航栏icon
@@ -31,7 +33,7 @@ const routes = [
   },
   {
     path: '/',
-    component: lazy(() => import('@/components/main')),
+    component: Main,
     children: [
       {
         path: '/home',

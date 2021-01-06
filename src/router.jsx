@@ -1,29 +1,24 @@
 import { Component, Suspense } from 'react'
 import { Route, Redirect, Switch, HashRouter } from 'react-router-dom'
-import { baseLoading } from './App'
-import { getToken } from '@/common/auth'
+import { canTurnTo } from '@/components/main/util'
+import { setUserInfo } from '@/store/action/user'
 import { queryUserInfo } from '@/api/user'
+import { getToken } from '@/common/auth'
+import { baseLoading } from './App'
+import { homePath } from '@/config'
+import routes from '@/routes'
 import store from '@/store'
 import Axios from 'axios'
-import { setUserInfo } from '@/store/action/user'
-import routes from '@/routes'
-import { homePath } from '@/config'
 
 const loginPath = '/login'
 
-function getUserInfo () {
-  const state = store.getState()
-  return state.user.userInfo
-}
-
-class IsInfo extends Component {
+class HasUserInfo extends Component {
   constructor (props) {
     super(props)
 
-    this.state = getUserInfo()
-
+    this.state = this.getStateUserInfo()
     this.unsubscribe = store.subscribe(() => {
-      this.setState(getUserInfo())
+      this.setState(this.getStateUserInfo())
     })
   }
 
@@ -38,6 +33,11 @@ class IsInfo extends Component {
           baseLoading.onHide()
         })
     }
+  }
+
+  getStateUserInfo () {
+    const storeState = store.getState()
+    return storeState.user.userInfo
   }
 
   getUserInfo () {
@@ -66,10 +66,16 @@ class IsInfo extends Component {
   }
 
   render () {
-    const { hasGetInfo } = this.state
-    const { component: Component, routes, ...props } = this.props
-
-    return hasGetInfo ? (<Component {...props}  routes={routes}/>) : null
+    const { hasGetInfo, access } = this.state
+    const { component: Component, path, ...props } = this.props
+    if (hasGetInfo) {
+      if (path === '/' || canTurnTo(path, routes, access)) {
+        return (<Component {...props}/>)
+      } else {
+        return (<Redirect to="/401"/>)
+      }
+    }
+    return null
   }
 }
 
@@ -80,18 +86,29 @@ function fadingRoute (route) {
     if (pathName !== loginPath && !token) {
       return (<Redirect from={pathName} to={loginPath}/>)
     } else if (pathName === loginPath && !token) {
-      return (<route.component {...props} routes={route.routes}/>)
+      return (<route.component {...props}/>)
     } else if (pathName === loginPath && token) {
       return (<Redirect from={pathName} to={homePath}/>)
     } else {
-      return (<IsInfo component={route.component} {...props} routes={route.children}/>)
+      const hasUserInfoProps = {
+        component: route.component,
+        path: route.path,
+        routes: route.children,
+        ...props
+      }
+      return (<HasUserInfo {...hasUserInfoProps}/>)
     }
   }
 }
 
 function PrivateRoute ({ ...route }) {
+  const routeProps = {
+    exact: route.exact,
+    path: route.path,
+    render: fadingRoute(route)
+  }
   return (
-    <Route exact={route.exact} path={route.path} render={fadingRoute(route)}/>
+    <Route {...routeProps}/>
   )
 }
 
