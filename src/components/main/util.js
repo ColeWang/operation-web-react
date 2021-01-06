@@ -12,7 +12,7 @@ function hasChild (item) {
  */
 function hasAccess (route, access) {
   if (route.meta && route.meta.access && route.meta.access.length) {
-    return hasOneOf(route.meta.access, access)
+    return hasOneOf(access, route.meta.access)
   } else {
     return true
   }
@@ -24,16 +24,18 @@ function hasAccess (route, access) {
 export function getMenuList (routers, access) {
   const arr = []
   routers.forEach((item) => {
-    const obj = {
-      path: item.path,
-      icon: (item.meta && item.meta.icon) || '',
-      meta: item.meta
-    }
-    if (hasChild(item) && hasAccess(item, access)) {
-      obj.children = getMenuList(item.children, access)
-    }
-    if (hasAccess(item, access)) {
-      arr.push(obj)
+    if (!item.meta || (item.meta && !item.meta.hideInMenu)) {
+      const obj = {
+        icon: (item.meta && item.meta.icon) || '',
+        path: item.path,
+        meta: item.meta
+      }
+      if (hasChild(item) && hasAccess(item, access)) {
+        obj.children = getMenuList(item.children, access)
+      }
+      if (hasAccess(item, access)) {
+        arr.push(obj)
+      }
     }
   })
   return arr
@@ -49,15 +51,15 @@ export function showChildren (item) {
 /**
  * 权鉴
  */
-export function canTurnTo (name, routes, access) {
+export function canTurnTo (path, routes, access) {
   function routePermissionJudge (list) {
-    // eslint-disable-next-line
     return list.some((item) => {
       if (item.children && item.children.length) {
         return routePermissionJudge(item.children)
-      } else if (item.name === name) {
+      } else if (item.path === path) {
         return hasAccess(item, access)
       }
+      return undefined
     })
   }
 

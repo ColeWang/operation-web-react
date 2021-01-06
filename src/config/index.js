@@ -1,5 +1,5 @@
 // 默认首页
-export const homePath = '/home'
+export const homePath = '/home/index'
 
 // token过期时间 默认一天
 export const cookieExpires = 1

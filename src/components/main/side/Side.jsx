@@ -24,10 +24,12 @@ class Side extends Component {
 
     this.state = {
       setStyle: { width: '238px' },
-      selectedKeys: []
+      selectedKeys: [],
+      openKeys: []
     }
 
     this.onSelect = this.onSelect.bind(this)
+    this.onOpenChange = this.onOpenChange.bind(this)
   }
 
   onSelect (params) {
@@ -37,13 +39,21 @@ class Side extends Component {
     }
   }
 
+  onOpenChange (openKeys) {
+    this.setState({
+      openKeys: openKeys
+    })
+  }
+
   render () {
     const { state, props } = this
 
     const menuProps = {
       inlineCollapsed: props.inlineStatus,
       selectedKeys: state.selectedKeys,
+      openKeys: state.openKeys,
       onClick: this.onSelect,
+      onOpenChange: this.onOpenChange,
       style: state.setStyle,
       theme: 'dark',
       mode: 'inline'
