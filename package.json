@@ -1,5 +1,6 @@
 {
   "name": "operation-web-react",
+  "author": "cole.wang",
   "version": "0.1.0",
   "private": true,
   "scripts": {
