@@ -65,21 +65,3 @@ export function getRouteList (routes, access) {
 export function showChildren (item) {
   return !!(item.children && item.children.length > 1)
 }
-
-/**
- * 权鉴
- */
-export function canTurnTo (path, routes, access) {
-  function routePermissionJudge (list) {
-    return list.some((item) => {
-      if (item.children && item.children.length) {
-        return routePermissionJudge(item.children)
-      } else if (item.path === path) {
-        return hasAccess(item, access)
-      }
-      return undefined
-    })
-  }
-
-  return routePermissionJudge(routes)
-}

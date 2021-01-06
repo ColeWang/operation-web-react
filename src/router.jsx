@@ -4,10 +4,7 @@ import { getToken } from '@/common/auth'
 import routes from '@/routes'
 import { homePath } from '@/config'
 
-export const loginPath = '/login'
-
-// lazy 懒加载替换元素
-export const SuspenseLoading = (<div/>)
+const loginPath = '/login'
 
 function fadingRoute (route) {
   return function (props) {
@@ -25,16 +22,19 @@ function fadingRoute (route) {
   }
 }
 
-function PrivateRoute ({ fadingRoute, ...route }) {
+function PrivateRoute ({ ...route }) {
   return (
     <Route exact={route.exact} path={route.path} render={fadingRoute(route)}/>
   )
 }
 
-export function createRoute (routes, fadingRoute) {
+// lazy 懒加载替换元素
+export const SuspenseLoading = (<div/>)
+
+export function createRoute (routes) {
   return routes.map((route, i) => {
       return (
-        <PrivateRoute fadingRoute={fadingRoute} key={i} {...route}/>
+        <PrivateRoute key={i} {...route}/>
       )
     }
   )
@@ -47,7 +47,7 @@ export default class Router extends Component {
         <Suspense fallback={SuspenseLoading}>
           <Switch>
             <Redirect exact from="/" to={homePath}/>
-            {createRoute(routes, fadingRoute)}
+            {createRoute(routes)}
           </Switch>
         </Suspense>
       </HashRouter>
