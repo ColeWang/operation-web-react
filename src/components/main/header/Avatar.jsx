@@ -4,6 +4,8 @@ import { UserOutlined } from '@ant-design/icons'
 import OIcon from '@/components/o-icon'
 import { withRouter } from 'react-router-dom'
 import { removeToken } from '@/common/auth'
+import { removeUserInfo } from '@/store/action/user'
+import store from '@/store'
 import './style/iAvatar.scss'
 
 class Avatar extends Component {
@@ -15,6 +17,7 @@ class Avatar extends Component {
 
   handleLogOut () {
     removeToken()
+    store.dispatch(removeUserInfo())
     this.props.history.push('/login')
   }
 

@@ -81,6 +81,7 @@ class LoginForm extends Component {
           }
         } else {
           this.setState({
+            loading: false,
             errorInfo: res.message
           })
         }

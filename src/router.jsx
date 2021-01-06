@@ -3,9 +3,10 @@ import { Route, Redirect, Switch, HashRouter } from 'react-router-dom'
 import { canTurnTo } from '@/components/main/util'
 import { setUserInfo } from '@/store/action/user'
 import { queryUserInfo } from '@/api/user'
-import { getToken } from '@/common/auth'
+import { getToken, removeToken } from '@/common/auth'
 import { baseLoading } from './App'
 import { homePath } from '@/config'
+import { Modal } from 'antd'
 import routes from '@/routes'
 import store from '@/store'
 import Axios from 'axios'
@@ -27,7 +28,14 @@ class HasUserInfo extends Component {
       baseLoading.onShow()
       this.getUserInfo()
         .catch((err) => {
-          console.log(err)
+          removeToken()
+          this.modal = Modal.error({
+            title: '错误',
+            content: err.message,
+            onOk: function () {
+              this.props.history.replace(loginPath)
+            }.bind(this)
+          })
         })
         .finally(() => {
           baseLoading.onHide()
@@ -62,6 +70,7 @@ class HasUserInfo extends Component {
   }
 
   componentWillUnmount () {
+    this.modal && this.modal.destroy()
     this.unsubscribe()
   }
 
@@ -124,17 +133,15 @@ export function createRoute (routes) {
   )
 }
 
-export default class Router extends Component {
-  render () {
-    return (
-      <HashRouter>
-        <Suspense fallback={SuspenseLoading}>
-          <Switch>
-            <Redirect exact from="/" to={homePath}/>
-            {createRoute(routes)}
-          </Switch>
-        </Suspense>
-      </HashRouter>
-    )
-  }
+export default function Router () {
+  return (
+    <HashRouter>
+      <Suspense fallback={SuspenseLoading}>
+        <Switch>
+          <Redirect exact from="/" to={homePath}/>
+          {createRoute(routes)}
+        </Switch>
+      </Suspense>
+    </HashRouter>
+  )
 }

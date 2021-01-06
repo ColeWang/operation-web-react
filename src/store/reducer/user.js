@@ -1,4 +1,4 @@
-import { SET_USER_INFO } from '../action/user'
+import { SET_USER_INFO, REMOVE_USER_INFO } from '../action/user'
 
 const userData = {
   userInfo: {
@@ -14,6 +14,12 @@ function user (state = userData, action) {
     case SET_USER_INFO:
       return {
         userInfo: action.payload
+      }
+    case REMOVE_USER_INFO:
+      return {
+        userInfo: {
+          hasGetInfo: false
+        }
       }
     default:
       return state
