@@ -1,16 +1,25 @@
-import { MAIN_INLINE_STATUS } from '../action/mainAction'
+import { MAIN_INLINE_STATUS, MAIN_OPEN_KEYS } from '../action/mainAction'
 
 const mainData = {
-  inlineStatus: false
+  inlineStatus: false,
+  openKeys: []
 }
 
 function mainReducer (state = mainData, action) {
-  if (action.type === MAIN_INLINE_STATUS) {
-    return {
-      inlineStatus: action.payload
-    }
+  switch (action.type) {
+    case MAIN_INLINE_STATUS:
+      return {
+        ...state,
+        inlineStatus: action.payload
+      }
+    case MAIN_OPEN_KEYS:
+      return {
+        ...state,
+        openKeys: action.payload
+      }
+    default:
+      return state
   }
-  return state
 }
 
 export default mainReducer

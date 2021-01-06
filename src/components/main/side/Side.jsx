@@ -2,7 +2,14 @@ import { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Menu } from 'antd'
 import createMenuList from './createMenuList'
+import store from '@/store'
+import { setOpenKeys } from '@/store/action/mainAction'
 import './style/side.scss'
+
+function getOpenKeys () {
+  const state = store.getState()
+  return state.mainReducer.openKeys
+}
 
 class Side extends Component {
   static getDerivedStateFromProps (props) {
@@ -25,11 +32,19 @@ class Side extends Component {
     this.state = {
       setStyle: { width: '238px' },
       selectedKeys: [],
-      openKeys: []
+      openKeys: getOpenKeys()
     }
 
     this.onSelect = this.onSelect.bind(this)
     this.onOpenChange = this.onOpenChange.bind(this)
+  }
+
+  componentDidMount () {
+    this.unsubscribe = store.subscribe(() => {
+      this.setState({
+        openKeys: getOpenKeys()
+      })
+    })
   }
 
   onSelect (params) {
@@ -40,9 +55,11 @@ class Side extends Component {
   }
 
   onOpenChange (openKeys) {
-    this.setState({
-      openKeys: openKeys
-    })
+    store.dispatch(setOpenKeys(openKeys))
+  }
+
+  componentWillUnmount () {
+    this.unsubscribe()
   }
 
   render () {
