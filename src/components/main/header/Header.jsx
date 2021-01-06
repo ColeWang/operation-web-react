@@ -1,10 +1,10 @@
 import { Component } from 'react'
+import { ALTER_INLINE_STATUS } from '../Main'
+import observer from '@/common/observer'
 import OIcon from '@/components/o-icon'
 import Fullscreen from './Fullscreen'
 import Avatar from './Avatar'
 import './style/header.scss'
-import store from '@/store'
-import { setInlineStatus } from '@/store/action/mainAction'
 
 export default class Header extends Component {
   constructor (props) {
@@ -14,7 +14,7 @@ export default class Header extends Component {
   }
 
   handleInline () {
-    store.dispatch(setInlineStatus(!this.props.inlineStatus))
+    observer.emit(ALTER_INLINE_STATUS, !this.props.inlineStatus)
   }
 
   render () {

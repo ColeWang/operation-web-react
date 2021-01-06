@@ -19,7 +19,7 @@ function hasAccess (route, access) {
 }
 
 /**
- * 生成动态路由 list
+ * 生成动态 Menu
  */
 export function getMenuList (routers, access) {
   const arr = []
@@ -35,6 +35,24 @@ export function getMenuList (routers, access) {
       }
       if (hasAccess(item, access)) {
         arr.push(obj)
+      }
+    }
+  })
+  return arr
+}
+
+/**
+ * 生成动态 Route
+ */
+export function getRouteList (routes, access) {
+  const arr = []
+  routes.forEach((item) => {
+    if (!item.meta || (item.meta && !item.meta.hideInMenu)) {
+      if (hasChild(item) && hasAccess(item, access)) {
+        arr.push(...getRouteList(item.children, access))
+      }
+      if (item.component && hasAccess(item, access)) {
+        arr.push(item)
       }
     }
   })

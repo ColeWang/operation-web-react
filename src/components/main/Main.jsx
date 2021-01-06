@@ -2,36 +2,34 @@ import { Component } from 'react'
 import MainHeader from './header'
 import MainSide from './side'
 import MainContent from './content'
+import observer from '@/common/observer'
 import { getMenuList } from './util'
-import routes from '@/routes'
-import store from '@/store'
+import { routeMenu } from '@/routes'
 import './style/main.scss'
 
-function getInlineStatus () {
-  const state = store.getState()
-  return state.mainReducer.inlineStatus
-}
+export const ALTER_INLINE_STATUS = Symbol()
 
 export default class Main extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      inlineStatus: getInlineStatus(),
-      menuList: getMenuList(routes, [])
+      inlineStatus: false,
+      menuList: getMenuList(routeMenu, [])
     }
+
+    this.setInlineStatus = this.setInlineStatus.bind(this)
+    observer.addListener(ALTER_INLINE_STATUS, this.setInlineStatus)
   }
 
-  componentDidMount () {
-    this.unsubscribe = store.subscribe(() => {
-      this.setState({
-        inlineStatus: getInlineStatus()
-      })
+  setInlineStatus (value) {
+    this.setState({
+      inlineStatus: value
     })
   }
 
   componentWillUnmount () {
-    this.unsubscribe()
+    observer.removeListener(ALTER_INLINE_STATUS, this.setInlineStatus)
   }
 
   render () {

@@ -2,10 +2,12 @@ import { Component, Suspense } from 'react'
 import { Route, Redirect, Switch, HashRouter } from 'react-router-dom'
 import { getToken } from '@/common/auth'
 import routes from '@/routes'
-import { canTurnTo } from '@/components/main/util'
 import { homePath } from '@/config'
 
-const loginPath = '/login'
+export const loginPath = '/login'
+
+// lazy 懒加载替换元素
+export const SuspenseLoading = (<div/>)
 
 function fadingRoute (route) {
   return function (props) {
@@ -18,32 +20,25 @@ function fadingRoute (route) {
     } else if (pathName === loginPath && token) {
       return (<Redirect from={pathName} to={homePath}/>)
     } else {
-      if (canTurnTo(pathName, routes, [])) {
-        return (<route.component {...props} routes={route.routes}/>)
-      } else {
-        return (<Redirect from={pathName} to="/401"/>)
-      }
+      return (<route.component {...props} routes={route.routes}/>)
     }
   }
 }
 
-function PrivateRoute ({ ...route }) {
+function PrivateRoute ({ fadingRoute, ...route }) {
   return (
     <Route exact={route.exact} path={route.path} render={fadingRoute(route)}/>
   )
 }
 
-function createRoute (routes) {
+export function createRoute (routes, fadingRoute) {
   return routes.map((route, i) => {
       return (
-        <PrivateRoute key={i} {...route}/>
+        <PrivateRoute fadingRoute={fadingRoute} key={i} {...route}/>
       )
     }
   )
 }
-
-// lazy 懒加载替换元素
-const SuspenseLoading = (<div/>)
 
 export default class Router extends Component {
   render () {
@@ -52,8 +47,7 @@ export default class Router extends Component {
         <Suspense fallback={SuspenseLoading}>
           <Switch>
             <Redirect exact from="/" to={homePath}/>
-            {createRoute(routes)}
-            <Redirect from="/*" to="/404"/>
+            {createRoute(routes, fadingRoute)}
           </Switch>
         </Suspense>
       </HashRouter>
