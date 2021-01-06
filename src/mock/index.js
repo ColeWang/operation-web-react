@@ -20,3 +20,11 @@ Mock.mock('/api/login', 'post', () => {
   }
   return createReturnedData(data)
 })
+
+// getUserInfo
+Mock.mock('/api/getUserInfo', 'get', () => {
+  const data = {
+    name: 'cole.wang'
+  }
+  return createReturnedData(data)
+})

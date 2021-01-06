@@ -16,10 +16,12 @@ export default class Content extends Component {
   }
 
   render () {
+    const { routes } = this.props
+
     return (
       <div className="main-content">
         <div className="main-content-space" ref={this.space}>
-          <Router/>
+          <Router routes={routes}/>
         </div>
         <BackTop target={this.setTarget}/>
       </div>

@@ -2,12 +2,15 @@ import { Component, Suspense } from 'react'
 import { Redirect, Switch } from 'react-router-dom'
 import { SuspenseLoading, createRoute } from '@/router'
 import { getRouteList } from '@/components/main/util'
-import { routeMenu } from '@/routes'
-
-const routeList = getRouteList(routeMenu, [])
+import store from '@/store'
 
 export default class Router extends Component {
   render () {
+    const { routes } = this.props
+
+    const access = store.getState().user.userInfo.access
+    const routeList = getRouteList(routes, access)
+
     return (
       <Suspense fallback={SuspenseLoading}>
         <Switch>
