@@ -76,12 +76,12 @@ class HasUserInfo extends Component {
 
   render () {
     const { hasGetInfo, access } = this.state
-    const { component: Component, path, ...props } = this.props
+    const { component: Component, noHasAccess, path, ...props } = this.props
     if (hasGetInfo) {
-      if (path === '/' || canTurnTo(path, routes, access)) {
+      if (noHasAccess || canTurnTo(path, routes, access)) {
         return (<Component {...props}/>)
       } else {
-        return (<Redirect to="/401"/>)
+        return (<Redirect from={path} to="/401"/>)
       }
     }
     return null
@@ -101,8 +101,8 @@ function fadingRoute (route) {
     } else {
       const hasUserInfoProps = {
         component: route.component,
+        noHasAccess: route.noHasAccess,
         path: route.path,
-        routes: route.children,
         ...props
       }
       return (<HasUserInfo {...hasUserInfoProps}/>)

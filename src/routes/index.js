@@ -2,7 +2,7 @@ import { lazy } from 'react'
 import Main from '@/components/main'
 
 /**
- * / 路径下 Main 组件生效 （一级路由不生效）
+ * noHasAccess: (false) 设为true不校验权限 适用于根路由
  * meta: {
  *  title: 导航栏title
  *  icon: 导航栏icon
@@ -10,6 +10,46 @@ import Main from '@/components/main'
  *  access: (null) 可访问该页面的权限数组 当前路由设置的权限会影响子路由
  * }
  */
+const mainRoutes = [
+  {
+    path: '/home',
+    exact: true,
+    component: lazy(() => import('@/views/home')),
+    meta: {
+      title: '首页',
+      icon: 'iconhome-filling'
+    }
+  },
+  {
+    path: '/alpha-menu',
+    meta: {
+      title: '多级菜单',
+      icon: 'iconhome-filling'
+    },
+    children: [
+      {
+        path: '/alpha-menu/level-1',
+        exact: true,
+        component: lazy(() => import('@/views/alpha-menu/Level1')),
+        meta: {
+          title: 'level-1',
+          icon: 'iconhome-filling'
+        }
+      },
+      {
+        path: '/alpha-menu/level-2',
+        exact: true,
+        component: lazy(() => import('@/views/alpha-menu/Level2')),
+        meta: {
+          title: 'level-2',
+          icon: 'iconhome-filling'
+        }
+      }
+    ]
+  }
+]
+
+// 一级路由
 const routes = [
   {
     path: '/login',
@@ -33,46 +73,14 @@ const routes = [
   },
   {
     path: '/',
+    noHasAccess: true,
     component: Main,
-    children: [
-      {
-        path: '/home',
-        exact: true,
-        component: lazy(() => import('@/views/home')),
-        meta: {
-          title: '首页',
-          icon: 'iconhome-filling'
-        }
-      },
-      {
-        path: '/alpha-menu',
-        meta: {
-          title: '多级菜单',
-          icon: 'iconhome-filling'
-        },
-        children: [
-          {
-            path: '/alpha-menu/level-1',
-            exact: true,
-            component: lazy(() => import('@/views/alpha-menu/Level1')),
-            meta: {
-              title: 'level-1',
-              icon: 'iconhome-filling'
-            }
-          },
-          {
-            path: '/alpha-menu/level-2',
-            exact: true,
-            component: lazy(() => import('@/views/alpha-menu/Level2')),
-            meta: {
-              title: 'level-2',
-              icon: 'iconhome-filling'
-            }
-          }
-        ]
-      }
-    ]
+    children: mainRoutes
   }
 ]
+
+export {
+  mainRoutes
+}
 
 export default routes
