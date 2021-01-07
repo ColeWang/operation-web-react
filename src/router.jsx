@@ -11,7 +11,7 @@ import routes from '@/routes'
 import store from '@/store'
 import Axios from 'axios'
 
-const loginPath = '/login'
+const LOGIN_PATH = '/login'
 
 class HasUserInfo extends Component {
   constructor (props) {
@@ -33,7 +33,7 @@ class HasUserInfo extends Component {
             title: '错误',
             content: err.message,
             onOk: function () {
-              this.props.history.replace(loginPath)
+              this.props.history.replace(LOGIN_PATH)
             }.bind(this)
           })
         })
@@ -92,11 +92,11 @@ function fadingRoute (route) {
   return function (props) {
     const token = getToken()
     const pathName = props.location.pathname
-    if (pathName !== loginPath && !token) {
-      return (<Redirect from={pathName} to={loginPath}/>)
-    } else if (pathName === loginPath && !token) {
+    if (pathName !== LOGIN_PATH && !token) {
+      return (<Redirect from={pathName} to={LOGIN_PATH}/>)
+    } else if (pathName === LOGIN_PATH && !token) {
       return (<route.component {...props}/>)
-    } else if (pathName === loginPath && token) {
+    } else if (pathName === LOGIN_PATH && token) {
       return (<Redirect from={pathName} to={homePath}/>)
     } else {
       const hasUserInfoProps = {
