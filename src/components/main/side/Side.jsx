@@ -1,10 +1,21 @@
 import { Component } from 'react'
+import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { Menu } from 'antd'
 import createMenuList from './createMenuList'
 import './style/side.scss'
 
 class Side extends Component {
+  static propTypes = {
+    menuList: PropTypes.array,
+    inlineStatus: PropTypes.bool
+  }
+
+  static defaultProps = {
+    menuList: [],
+    inlineStatus: false
+  }
+
   static getDerivedStateFromProps (props) {
     if (props.inlineStatus) {
       return {

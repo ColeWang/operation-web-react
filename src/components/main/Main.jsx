@@ -4,6 +4,8 @@ import MainSide from './side'
 import MainContent from './content'
 import observer from '@/common/observer'
 import { getMenuList } from './util'
+import { mainRoutes } from '@/routes'
+import store from '@/store'
 import './style/main.scss'
 
 export const ALTER_INLINE_STATUS = Symbol()
@@ -12,9 +14,12 @@ export default class Main extends Component {
   constructor (props) {
     super(props)
 
+    const storeState = store.getState()
+    const access = storeState.user.userInfo.access
+
     this.state = {
       inlineStatus: false,
-      menuList: getMenuList(props.routes, [])
+      menuList: getMenuList(mainRoutes, access)
     }
 
     this.setInlineStatus = this.setInlineStatus.bind(this)
@@ -33,7 +38,6 @@ export default class Main extends Component {
 
   render () {
     const { state } = this
-    const { routes } = this.props
 
     return (
       <div className="main">
@@ -41,7 +45,7 @@ export default class Main extends Component {
         <div className="prime">
           <MainHeader inlineStatus={state.inlineStatus}/>
           <div className="content">
-            <MainContent routes={routes}/>
+            <MainContent/>
           </div>
         </div>
       </div>

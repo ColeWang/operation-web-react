@@ -1,4 +1,5 @@
 import { Component, Suspense } from 'react'
+import PropTypes from 'prop-types'
 import { Route, Redirect, Switch, HashRouter } from 'react-router-dom'
 import { canTurnTo } from '@/components/main/util'
 import { setUserInfo } from '@/store/action/user'
@@ -11,9 +12,15 @@ import routes from '@/routes'
 import store from '@/store'
 import Axios from 'axios'
 
-const loginPath = '/login'
+const LOGIN_PATH = '/login'
 
 class HasUserInfo extends Component {
+  static propTypes = {
+    component: PropTypes.any,
+    path: PropTypes.string.isRequired,
+    noHasAccess: PropTypes.bool
+  }
+
   constructor (props) {
     super(props)
 
@@ -32,9 +39,9 @@ class HasUserInfo extends Component {
           this.modal = Modal.error({
             title: '错误',
             content: err.message,
-            onOk: function () {
-              this.props.history.replace(loginPath)
-            }.bind(this)
+            onOk: () => {
+              this.props.history.replace(LOGIN_PATH)
+            }
           })
         })
         .finally(() => {
@@ -76,12 +83,12 @@ class HasUserInfo extends Component {
 
   render () {
     const { hasGetInfo, access } = this.state
-    const { component: Component, path, ...props } = this.props
+    const { component: Component, noHasAccess, path, ...props } = this.props
     if (hasGetInfo) {
-      if (path === '/' || canTurnTo(path, routes, access)) {
+      if (noHasAccess || canTurnTo(path, routes, access)) {
         return (<Component {...props}/>)
       } else {
-        return (<Redirect to="/401"/>)
+        return (<Redirect from={path} to="/401"/>)
       }
     }
     return null
@@ -92,17 +99,17 @@ function fadingRoute (route) {
   return function (props) {
     const token = getToken()
     const pathName = props.location.pathname
-    if (pathName !== loginPath && !token) {
-      return (<Redirect from={pathName} to={loginPath}/>)
-    } else if (pathName === loginPath && !token) {
+    if (pathName !== LOGIN_PATH && !token) {
+      return (<Redirect from={pathName} to={LOGIN_PATH}/>)
+    } else if (pathName === LOGIN_PATH && !token) {
       return (<route.component {...props}/>)
-    } else if (pathName === loginPath && token) {
+    } else if (pathName === LOGIN_PATH && token) {
       return (<Redirect from={pathName} to={homePath}/>)
     } else {
       const hasUserInfoProps = {
         component: route.component,
+        noHasAccess: route.noHasAccess,
         path: route.path,
-        routes: route.children,
         ...props
       }
       return (<HasUserInfo {...hasUserInfoProps}/>)

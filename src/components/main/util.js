@@ -47,13 +47,11 @@ export function getMenuList (routers, access) {
 export function getRouteList (routes, access) {
   const arr = []
   routes.forEach((item) => {
-    if (!item.meta || (item.meta && !item.meta.hideInMenu)) {
-      if (hasChild(item) && hasAccess(item, access)) {
-        arr.push(...getRouteList(item.children, access))
-      }
-      if (item.component && hasAccess(item, access)) {
-        arr.push(item)
-      }
+    if (hasChild(item) && hasAccess(item, access)) {
+      arr.push(...getRouteList(item.children, access))
+    }
+    if (item.component && hasAccess(item, access)) {
+      arr.push(item)
     }
   })
   return arr
