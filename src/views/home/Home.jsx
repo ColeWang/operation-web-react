@@ -8,7 +8,7 @@ export default class Home extends Component {
     loading: false
   }
 
-  submit () {
+  submit = () => {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve()
@@ -19,7 +19,7 @@ export default class Home extends Component {
   render () {
     const { state } = this
 
-    const onSubmit = pendingEffect(this, this.submit.bind(this))
+    const onSubmit = pendingEffect(this, this.submit)
 
     return (
       <div className="home">

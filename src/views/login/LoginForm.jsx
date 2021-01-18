@@ -29,12 +29,12 @@ class LoginForm extends Component {
       this.state.checked = true
     }
 
-    this.inputEmit = this.inputEmit.bind(this)
+    this.saveFormData = this.saveFormData.bind(this)
     this.checkedChange = this.checkedChange.bind(this)
     this.onFinish = this.onFinish.bind(this)
   }
 
-  inputEmit (type) {
+  saveFormData (type) {
     return function (evt) {
       this.setState({
         [type]: evt.target.value
@@ -110,13 +110,13 @@ class LoginForm extends Component {
     const usernameInputProps = {
       placeholder: '请输入用户名',
       value: state.username,
-      onChange: this.inputEmit('username'),
+      onChange: this.saveFormData('username'),
       addonBefore: usernameIcon
     }
     const passwordInputProps = {
       placeholder: '请输入密码',
       value: state.password,
-      onChange: this.inputEmit('password'),
+      onChange: this.saveFormData('password'),
       addonBefore: passwordIcon
     }
 

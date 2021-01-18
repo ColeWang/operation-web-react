@@ -4,9 +4,14 @@ import { BackTop } from 'antd'
 import './style/content.scss'
 
 export default class Content extends Component {
-  space = createRef()
+  constructor (props) {
+    super(props)
 
-  setTarget = () => {
+    this.space = createRef()
+    this.setTarget = this.setTarget.bind(this)
+  }
+
+  setTarget () {
     return this.space.current
   }
 

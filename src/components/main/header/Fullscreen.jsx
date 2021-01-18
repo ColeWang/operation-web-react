@@ -10,8 +10,15 @@ function isVideoInFullscreen () {
 }
 
 export default class Fullscreen extends Component {
-  state = {
-    fullscreen: false
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      fullscreen: false
+    }
+
+    this.handleFullscreen = this.handleFullscreen.bind(this)
+    this.fullscreenChange = this.fullscreenChange.bind(this)
   }
 
   componentDidMount () {
@@ -31,7 +38,7 @@ export default class Fullscreen extends Component {
     off(dom, 'msfullscreenchange', this.fullscreenChange, false)
   }
 
-  handleFullscreen = () => {
+  handleFullscreen () {
     if (this.state.fullscreen) {
       if (dom.exitFullscreen) {
         dom.exitFullscreen()
@@ -55,7 +62,7 @@ export default class Fullscreen extends Component {
     }
   }
 
-  fullscreenChange = () => {
+  fullscreenChange () {
     this.setState({
       fullscreen: !this.state.fullscreen
     })
@@ -72,7 +79,7 @@ export default class Fullscreen extends Component {
 
     return (
       <div className="fullscreen">
-        <OIcon {...iconProps}/>
+        <OIcon { ...iconProps }/>
       </div>
     )
   }
