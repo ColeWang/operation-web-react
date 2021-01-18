@@ -1,4 +1,5 @@
 import { Component, Suspense } from 'react'
+import PropTypes from 'prop-types'
 import { Route, Redirect, Switch, HashRouter } from 'react-router-dom'
 import { canTurnTo } from '@/components/main/util'
 import { setUserInfo } from '@/store/action/user'
@@ -14,6 +15,12 @@ import Axios from 'axios'
 const LOGIN_PATH = '/login'
 
 class HasUserInfo extends Component {
+  static propTypes = {
+    component: PropTypes.any,
+    path: PropTypes.string.isRequired,
+    noHasAccess: PropTypes.bool
+  }
+
   constructor (props) {
     super(props)
 
@@ -32,9 +39,9 @@ class HasUserInfo extends Component {
           this.modal = Modal.error({
             title: '错误',
             content: err.message,
-            onOk: function () {
+            onOk: () => {
               this.props.history.replace(LOGIN_PATH)
-            }.bind(this)
+            }
           })
         })
         .finally(() => {

@@ -1,10 +1,17 @@
 import { Component } from 'react'
+import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { Button, Space } from 'antd'
 import { homePath } from '@/config'
 import './style/errorContent.scss'
 
 class ErrorContent extends Component {
+  static propTypes = {
+    code: PropTypes.number.isRequired,
+    desc: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+  }
+
   constructor (props) {
     super(props)
 

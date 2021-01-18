@@ -4,12 +4,8 @@ import { pendingEffect } from '@/util/pendingEffect'
 import './home.scss'
 
 export default class Home extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      loading: false
-    }
+  state = {
+    loading: false
   }
 
   submit () {

@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import PropTypes from 'prop-types'
 import { ALTER_INLINE_STATUS } from '../Main'
 import observer from '@/common/observer'
 import OIcon from '@/components/o-icon'
@@ -7,13 +8,15 @@ import Avatar from './Avatar'
 import './style/header.scss'
 
 export default class Header extends Component {
-  constructor (props) {
-    super(props)
-
-    this.handleInline = this.handleInline.bind(this)
+  static propTypes = {
+    inlineStatus: PropTypes.bool
   }
 
-  handleInline () {
+  static defaultProps = {
+    inlineStatus: false
+  }
+
+  handleInline = () => {
     observer.emit(ALTER_INLINE_STATUS, !this.props.inlineStatus)
   }
 

@@ -9,13 +9,7 @@ import store from '@/store'
 import './style/iAvatar.scss'
 
 class Avatar extends Component {
-  constructor (props) {
-    super(props)
-
-    this.handleLogOut = this.handleLogOut.bind(this)
-  }
-
-  handleLogOut () {
+  handleLogOut = () => {
     removeToken()
     store.dispatch(removeUserInfo())
     this.props.history.push('/login')
