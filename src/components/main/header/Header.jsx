@@ -16,7 +16,13 @@ export default class Header extends Component {
     inlineStatus: false
   }
 
-  handleInline = () => {
+  constructor (props) {
+    super(props)
+
+    this.handleInline = this.handleInline.bind(this)
+  }
+
+  handleInline () {
     observer.emit(ALTER_INLINE_STATUS, !this.props.inlineStatus)
   }
 

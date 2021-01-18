@@ -39,9 +39,9 @@ class HasUserInfo extends Component {
           this.modal = Modal.error({
             title: '错误',
             content: err.message,
-            onOk: () => {
+            onOk: function () {
               this.props.history.replace(LOGIN_PATH)
-            }
+            }.bind(this)
           })
         })
         .finally(() => {
