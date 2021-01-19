@@ -17,15 +17,17 @@ class Side extends Component {
   }
 
   static getDerivedStateFromProps (props) {
+    const { location } = props.history
+
     if (props.inlineStatus) {
       return {
         setStyle: { width: '77px' },
-        selectedKeys: [props.history.location.pathname]
+        selectedKeys: [location.pathname]
       }
     } else {
       return {
         setStyle: { width: '238px' },
-        selectedKeys: [props.history.location.pathname]
+        selectedKeys: [location.pathname]
       }
     }
   }
@@ -34,7 +36,7 @@ class Side extends Component {
     super(props)
 
     this.state = {
-      setStyle: { width: '238px' },
+      setStyle: {},
       selectedKeys: []
     }
 

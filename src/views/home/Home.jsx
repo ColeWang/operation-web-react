@@ -4,11 +4,16 @@ import { pendingEffect } from '@/util/pendingEffect'
 import './home.scss'
 
 export default class Home extends Component {
-  state = {
-    loading: false
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      loading: false
+    }
+    this.onSubmit = pendingEffect(this, this.submit, 'loading')
   }
 
-  submit = () => {
+  submit () {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve()
@@ -19,11 +24,9 @@ export default class Home extends Component {
   render () {
     const { state } = this
 
-    const onSubmit = pendingEffect(this, this.submit)
-
     return (
       <div className="home">
-        <Button onClick={onSubmit} loading={state.loading}>Home</Button>
+        <Button onClick={this.onSubmit} loading={state.loading}>Home</Button>
       </div>
     )
   }
