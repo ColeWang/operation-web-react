@@ -6,7 +6,6 @@ import { homePath } from '@/config'
 import OIcon from '@/components/o-icon'
 import { Button, Checkbox, Form, Input } from 'antd'
 import { withRouter } from 'react-router-dom'
-import style from './Login.module.scss'
 
 class LoginForm extends Component {
   constructor (props) {
