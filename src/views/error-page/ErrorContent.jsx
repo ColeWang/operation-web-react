@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { Button, Space } from 'antd'
 import { homePath } from '@/config'
-import './style/errorContent.scss'
+import style from './ErrorContent.module.scss'
 
 class ErrorContent extends Component {
   static propTypes = {
@@ -53,14 +53,14 @@ class ErrorContent extends Component {
     const { props, state } = this
 
     return (
-      <div className="error-page">
-        <div className="content-con">
+      <div className={style['error-page']}>
+        <div className={style['content-con']}>
           <img src={props.src} alt={props.code}/>
-          <div className="text-con">
+          <div className={style['text-con']}>
             <h4>{props.code}</h4>
             <h5>{props.desc}</h5>
           </div>
-          <Space className="back-btn-group" size={10}>
+          <Space className={style['back-btn-group']} size={10}>
             <Button onClick={this.backHome}>返回首页</Button>
             <Button onClick={this.backPrev}>返回上一页({state.second}s)</Button>
           </Space>

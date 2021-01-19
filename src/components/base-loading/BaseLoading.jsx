@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { CSSTransition } from 'react-transition-group'
-import './style/baseLoading.scss'
+import style from './BaseLoading.module.scss'
 
 export default class BaseLoading extends Component {
   constructor (props) {
@@ -23,10 +23,10 @@ export default class BaseLoading extends Component {
 
     return (
       <CSSTransition {...transitionProps}>
-        <div className="x-shade">
-          <div className="x-loading-wrapper">
-            <svg viewBox="25 25 50 50" className="circular">
-              <circle cx="50" cy="50" r="20" fill="none" className="path"/>
+        <div className={style['x-shade']}>
+          <div className={style['x-loading-wrapper']}>
+            <svg viewBox="25 25 50 50" className={style['circular']}>
+              <circle cx="50" cy="50" r="20" fill="none" className={style['path']}/>
             </svg>
           </div>
         </div>

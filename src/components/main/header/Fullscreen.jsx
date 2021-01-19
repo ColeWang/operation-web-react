@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { on, off } from '@/util/dom'
 import OIcon from '@/components/o-icon'
-import './style/fullscreen.scss'
+import style from './Fullscreen.module.scss'
 
 const dom = document
 
@@ -72,13 +72,13 @@ export default class Fullscreen extends Component {
     const { state } = this
 
     const iconProps = {
-      className: 'icon',
+      className: style['icon'],
       type: state.fullscreen ? 'iconfullscreen-shrink' : 'iconfullscreen-expand',
       onClick: this.handleFullscreen
     }
 
     return (
-      <div className="fullscreen">
+      <div className={style['fullscreen']}>
         <OIcon { ...iconProps }/>
       </div>
     )

@@ -6,7 +6,7 @@ import observer from '@/common/observer'
 import { getMenuList } from './util'
 import { mainRoutes } from '@/routes'
 import store from '@/store'
-import './style/main.scss'
+import style from './Main.module.scss'
 
 export const ALTER_INLINE_STATUS = Symbol()
 
@@ -40,11 +40,11 @@ export default class Main extends Component {
     const { state } = this
 
     return (
-      <div className="main">
+      <div className={style['main']}>
         <MainSide menuList={state.menuList} inlineStatus={state.inlineStatus}/>
-        <div className="prime">
+        <div className={style['prime']}>
           <MainHeader inlineStatus={state.inlineStatus}/>
-          <div className="content">
+          <div className={style['content']}>
             <MainContent/>
           </div>
         </div>

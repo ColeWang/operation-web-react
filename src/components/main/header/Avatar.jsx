@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom'
 import { removeToken } from '@/common/auth'
 import { removeUserInfo } from '@/store/action/user'
 import store from '@/store'
-import './style/iAvatar.scss'
+import style from './Avatar.module.scss'
 
 class Avatar extends Component {
   constructor (props) {
@@ -22,7 +22,7 @@ class Avatar extends Component {
 
   render () {
     const menu = (
-      <div className="card">
+      <div className={style['card']}>
         <p onClick={this.handleLogOut}>退出登录</p>
       </div>
     )
@@ -38,11 +38,11 @@ class Avatar extends Component {
     const icon = (<UserOutlined/>)
 
     return (
-      <div className="avatar">
+      <div className={style['avatar']}>
         <Dropdown {...dropdownProps}>
-          <div className="avatar-con">
+          <div className={style['avatar-con']}>
             <AntAvatar icon={icon}/>
-            <OIcon className="icon" type="iconarrow-down-filling"/>
+            <OIcon className={style['icon']} type="iconarrow-down-filling"/>
           </div>
         </Dropdown>
       </div>

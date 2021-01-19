@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { Button } from 'antd'
 import { pendingEffect } from '@/util/pendingEffect'
-import './home.scss'
+import style from './Home.module.scss'
 
 export default class Home extends Component {
   constructor (props) {
@@ -25,7 +25,7 @@ export default class Home extends Component {
     const { state } = this
 
     return (
-      <div className="home">
+      <div className={style['home']}>
         <Button onClick={this.onSubmit} loading={state.loading}>Home</Button>
       </div>
     )

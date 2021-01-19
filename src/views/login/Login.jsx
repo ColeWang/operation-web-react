@@ -1,18 +1,18 @@
 import LoginForm from './LoginForm'
-import './style/login.scss'
+import style from './Login.module.scss'
 
 function Login () {
   return (
-    <div className="login">
-      <div className="login-con">
-        <div className="title">
+    <div className={style['login']}>
+      <div className={style['login-con']}>
+        <div className={style['title']}>
           <p>欢迎登陆</p>
         </div>
-        <div className="form-con">
+        <div className={style['form-con']}>
           <LoginForm/>
         </div>
       </div>
-      <div className="footer-wrap">
+      <div className={style['footer-wrap']}>
         <p>copyright@2019&nbsp;XX科技&nbsp;All&nbsp;Rights&nbsp;Reserved</p>
       </div>
     </div>

@@ -5,7 +5,7 @@ import observer from '@/common/observer'
 import OIcon from '@/components/o-icon'
 import Fullscreen from './Fullscreen'
 import Avatar from './Avatar'
-import './style/header.scss'
+import style from './Header.module.scss'
 
 export default class Header extends Component {
   static propTypes = {
@@ -30,18 +30,18 @@ export default class Header extends Component {
     const { props } = this
 
     const oIconClass = {
-      'icon': true,
-      'down': props.inlineStatus
+      [style['icon']]: true,
+      [style['down']]: props.inlineStatus
     }
 
     return (
-      <div className="main-header">
-        <div className="header-left">
-          <div className="setting-down" onClick={this.handleInline}>
+      <div className={style['main-header']}>
+        <div className={style['header-left']}>
+          <div className={style['setting-down']} onClick={this.handleInline}>
             <OIcon className={oIconClass} type="iconcaidan"/>
           </div>
         </div>
-        <div className="header-right">
+        <div className={style['header-right']}>
           <Fullscreen/>
           <Avatar/>
         </div>

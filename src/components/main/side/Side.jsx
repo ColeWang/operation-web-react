@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { Menu } from 'antd'
 import createMenuList from './createMenuList'
-import './style/side.scss'
+import style from './Side.module.scss'
 
 class Side extends Component {
   static propTypes = {
@@ -63,11 +63,11 @@ class Side extends Component {
     }
 
     return (
-      <div className="main-side" style={state.setStyle}>
-        <div className="side">
-          <div className="logo"/>
-          <Menu {...menuProps}>
-            {createMenuList(props.menuList)}
+      <div className={style['main-side']} style={ state.setStyle }>
+        <div className={style['side']}>
+          <div className={style['logo']}/>
+          <Menu { ...menuProps }>
+            { createMenuList(props.menuList) }
           </Menu>
         </div>
       </div>
