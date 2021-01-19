@@ -6,6 +6,7 @@ import { homePath } from '@/config'
 import OIcon from '@/components/o-icon'
 import { Button, Checkbox, Form, Input } from 'antd'
 import { withRouter } from 'react-router-dom'
+import style from './Login.module.scss'
 
 class LoginForm extends Component {
   constructor (props) {
@@ -133,7 +134,7 @@ class LoginForm extends Component {
         <Form.Item name="password" rules={passwordRules} initialValue={state.password}>
           <Input.Password {...passwordInputProps}/>
         </Form.Item>
-        <div className="checked-con">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '18px' }}>
           <Checkbox {...checkedProps}>记住账号</Checkbox>
           <a href="http://www.baidu.com" rel="noopener noreferrer" target="_blank">忘记密码</a>
         </div>
