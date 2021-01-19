@@ -1,34 +1,25 @@
 /**
  * 解决 button等组件loading状态
+ * @param target {any}
+ * @param func {function}
+ * @param type {string}
+ * @param callback {function?}
+ * @returns {function(...[*]): Promise<void>}
  */
-
-// @todo 实验 慎用
-export function pendingEffect (target, func) {
+export function pendingEffect (target, func, type, callback) {
   function setLoading (val) {
     this.setState({
-      loading: val
+      [type]: val
+    }, () => {
+      callback && callback()
     })
   }
 
-  const baseHandler = {
-    construct () {
-      throw new TypeError('Does not support the new ()')
-    },
-    apply (trapTarget, thisArg, argumentList) {
-      const loading = target.state.loading
-      if (loading === false || loading === true) {
-        if (!loading) {
-          void async function () {
-            setLoading.call(target, true)
-            await Reflect.apply(trapTarget, thisArg, argumentList)
-            setLoading.call(target, false)
-          }()
-        }
-      } else {
-        throw new TypeError('Expected a state.loading')
-      }
-
+  return async function (...arg) {
+    if (!target.state[type]) {
+      setLoading.call(target, true)
+      await func.call(target, ...arg)
+      setLoading.call(target, false)
     }
   }
-  return new Proxy(func, baseHandler)
 }
