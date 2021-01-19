@@ -6,6 +6,7 @@
  * @param callback {function?}
  * @returns {function(...[*]): Promise<void>}
  */
+// @todo Alpha 功能亦未完善 无法像Vue版一样使用
 export function pendingEffect (target, func, type, callback) {
   function setLoading (val) {
     this.setState({
