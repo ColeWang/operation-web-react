@@ -63,11 +63,11 @@ class Side extends Component {
     }
 
     return (
-      <div className={style['main-side']} style={ state.setStyle }>
+      <div className={style['main-side']} style={state.setStyle}>
         <div className={style['side']}>
           <div className={style['logo']}/>
-          <Menu { ...menuProps }>
-            { createMenuList(props.menuList) }
+          <Menu {...menuProps}>
+            {createMenuList(props.menuList)}
           </Menu>
         </div>
       </div>

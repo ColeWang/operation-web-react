@@ -79,7 +79,7 @@ export default class Fullscreen extends Component {
 
     return (
       <div className={style['fullscreen']}>
-        <OIcon { ...iconProps }/>
+        <OIcon {...iconProps}/>
       </div>
     )
   }

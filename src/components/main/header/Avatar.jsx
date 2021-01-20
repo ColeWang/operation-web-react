@@ -14,6 +14,7 @@ class Avatar extends Component {
 
     this.handleLogOut = this.handleLogOut.bind(this)
   }
+
   handleLogOut () {
     removeToken()
     store.dispatch(removeUserInfo())
