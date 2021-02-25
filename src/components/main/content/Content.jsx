@@ -1,5 +1,5 @@
 import { Component, createRef } from 'react'
-import Router from './router'
+import Router from './Router'
 import { BackTop } from 'antd'
 import style from './Content.module.scss'
 

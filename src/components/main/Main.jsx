@@ -5,21 +5,22 @@ import MainContent from './content'
 import observer from '@/common/observer'
 import { getMenuList } from './util'
 import { mainRoutes } from '@/routes'
-import store from '@/store'
+import { connect } from 'react-redux'
 import style from './Main.module.scss'
 
 export const ALTER_INLINE_STATUS = Symbol()
 
-export default class Main extends Component {
+export default connect(
+  (state) => ({
+    access: state.user.userInfo.access
+  })
+)(class Main extends Component {
   constructor (props) {
     super(props)
 
-    const storeState = store.getState()
-    const access = storeState.user.userInfo.access
-
     this.state = {
       inlineStatus: false,
-      menuList: getMenuList(mainRoutes, access)
+      menuList: getMenuList(mainRoutes, props.access)
     }
 
     this.setInlineStatus = this.setInlineStatus.bind(this)
@@ -51,4 +52,4 @@ export default class Main extends Component {
       </div>
     )
   }
-}
+})

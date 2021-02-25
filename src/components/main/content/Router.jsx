@@ -1,18 +1,20 @@
 import { Component, Suspense } from 'react'
 import { Redirect, Switch } from 'react-router-dom'
-import { SuspenseLoading, createRoute } from '@/router'
+import { SuspenseLoading, createRoute } from '@/Router'
 import { getRouteList } from '@/components/main/util'
 import { mainRoutes } from '@/routes'
-import store from '@/store'
+import { connect } from 'react-redux'
 
-export default class Router extends Component {
+export default connect(
+  (state) => ({
+    access: state.user.userInfo.access
+  })
+)(class Router extends Component {
   constructor (props) {
     super(props)
-    const storeState = store.getState()
-    const access = storeState.user.userInfo.access
 
     this.state = {
-      routeList: getRouteList(mainRoutes, access)
+      routeList: getRouteList(mainRoutes, props.access)
     }
   }
 
@@ -26,4 +28,4 @@ export default class Router extends Component {
       </Suspense>
     )
   }
-}
+})

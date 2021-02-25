@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { default as loading, BaseLoading } from '@/components/base-loading'
 import { ConfigProvider } from 'antd'
-import Router from '@/router'
+import Router from '@/Router'
 import zhCN from 'antd/es/locale/zh_CN'
 import moment from 'moment'
 import 'moment/locale/zh-cn'
